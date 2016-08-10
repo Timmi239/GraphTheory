@@ -16,6 +16,7 @@ from helpers import get_input_graph_in_list
 
 
 def main():
+    #doesn`t working =(
     edges_list, vertex_count = get_input_graph_in_list()
     single_vertexes_count = count_single_vertexes(edges_list, vertex_count)
     components = single_vertexes_count
