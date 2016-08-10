@@ -1,9 +1,9 @@
-def get_input_graph_in_dict():
+def get_input_graph_in_dict(start_vertex_number=1):
     vertex_count, edges_count = _get_vertex_and_edges_counts()
     edges_dict = dict()
 
-    for i in range(1, vertex_count + 1):
-        edges_dict[str(i)] = ()
+    for i in range(start_vertex_number, vertex_count + start_vertex_number):
+        edges_dict[str(i)] = set()
 
     for _ in range(edges_count):
         new_edge = input().split()
