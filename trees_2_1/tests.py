@@ -16,8 +16,8 @@ class Tests(TestCase):
         assert count_connected_component(edges_list, vertex_count) == 1
 
     def test_central_vertex(self):
-        edges_list = [['1', '2'], ['1', '3']]
-        vertex_count = 4
+        edges_list = [['1', '2'], ['1', '3'], ['1', '4']]
+        vertex_count = 5
 
         assert count_connected_component(edges_list, vertex_count) == 2
 
