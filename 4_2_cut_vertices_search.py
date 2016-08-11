@@ -1,6 +1,6 @@
 import sys
 
-from helpers import get_input_graph_in_dict
+from common.helpers import get_input_graph_in_dict
 
 
 # Найдите все точки сочленения в графе.

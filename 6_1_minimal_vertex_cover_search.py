@@ -11,47 +11,9 @@
 
 # Скопируйте описание графа из входа на выход и выведите единственную дополнительную строку — список номеров вершин,
 # составляющих минимальное вершинное покрытие. Если таких покрытий несколько, выведите любое.
-
-
-class Edge(object):
-    def __init__(self, c, v_from, v_to):
-        self.c = c
-        self.f = 0
-        self.v_from = v_from
-        self.v_to = v_to
-
-    def __repr__(self):
-        return '|c: {}, f: {}, v_from: {}, v_to: {}|'.format(self.c, self.f, self.v_from, self.v_to)
-
-    def __str__(self):
-        return self.__repr__()
-
-
-class Vertex(object):
-    def __init__(self, name):
-        self.name = name
-        self.mark = Mark(None, None, 0)
-        self.edges_list = []
-
-    def add_edge(self, edge):
-        self.edges_list.append(edge)
-
-    def __repr__(self):
-        return '|name: {}, edges_list: {}, mark: {}|'.format(self.name, self.edges_list, str(self.mark))
-
-    def __str__(self):
-        return self.__repr__()
-
-
-class Mark(object):
-    def __init__(self, prev_vertex_name, sign, value):
-        self.prev_vertex_name = prev_vertex_name
-        self.sign = sign
-        self.value = value
-
-    def __repr__(self):
-        return '|prev_vertex_name: {}, sign: {}, value: {}|'.\
-            format(self.prev_vertex_name, self.sign, str(self.value))
+from common.edge import Edge
+from common.mark import Mark
+from common.vertex import Vertex
 
 
 def main():
@@ -117,6 +79,7 @@ def dfs_r(vertex_list, visited_vertexes, current_vertex_index, pairs):
             visited_vertexes.add(e.v_from)
             visited_vertexes = dfs_l(vertex_list, visited_vertexes, int(e.v_from), pairs)
     return visited_vertexes
+
 
 def print_answer(tops):
     tops = map(lambda x: str(int(x) - 1), tops)

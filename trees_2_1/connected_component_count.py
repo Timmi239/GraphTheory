@@ -1,6 +1,3 @@
-from helpers import get_input_graph_in_list
-
-
 # Найти количество компонент связности неориентированного графа
 # при помощи поиска в глубину.
 #
@@ -13,9 +10,12 @@ from helpers import get_input_graph_in_list
 #
 # Формат выходных данных:
 # Количество компонент связности графа.
+from typing import List, Optional
+
+from common.helpers import get_input_graph_in_list
 
 
-def main():
+def count_connected_component():
     #doesn`t working =(
     edges_list, vertex_count = get_input_graph_in_list()
     single_vertexes_count = count_single_vertexes(edges_list, vertex_count)
@@ -38,12 +38,13 @@ def main():
     print(components)
 
 
-def count_single_vertexes(edges_list, vertex_count):
+def count_single_vertexes(edges_list: List[Optional[List]], vertex_count: int) -> int:
     count = 0
-    for v in range(1, vertex_count + 1):
+    for i in range(1, vertex_count + 1):
+        v = str(i)
         exists = False
         for e in edges_list:
-            if str(v) in e:
+            if v in e:
                 exists = True
         if not exists:
             count += 1
@@ -53,7 +54,7 @@ def count_single_vertexes(edges_list, vertex_count):
 def find_connected_vertex(edges_list, current_vertex):
     for e in edges_list:
         if current_vertex in e:
-            return list(filter(lambda x: x != current_vertex, e))[0]
+            return e[1] if current_vertex == e[0] else e[0]
     return None
 
 
@@ -64,4 +65,4 @@ def del_edge_with_vertex(edges_list, current_vertex):
 
 
 if __name__ == '__main__':
-    main()
+    count_connected_component()
