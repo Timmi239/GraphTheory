@@ -10,14 +10,11 @@
 #
 # Формат выходных данных:
 # Количество компонент связности графа.
-from typing import List, Optional
 
 from common.helpers import get_input_graph_in_list
 
 
-def count_connected_component():
-    #doesn`t working =(
-    edges_list, vertex_count = get_input_graph_in_list()
+def count_connected_component(edges_list, vertex_count):
     single_vertexes_count = count_single_vertexes(edges_list, vertex_count)
     components = single_vertexes_count
     while edges_list:
@@ -27,7 +24,7 @@ def count_connected_component():
         while True:
             while find_connected_vertex(edges_list, current_component[index]):
                 connected_vertex = find_connected_vertex(edges_list, current_component[index])
-                del_edge_with_vertex(edges_list, current_component[index])
+                del_edge_with_vertex(edges_list, current_component[index], connected_vertex)
                 if connected_vertex not in current_component:
                     current_component.append(connected_vertex)
             if len(current_component) > index + 1:
@@ -35,10 +32,10 @@ def count_connected_component():
             else:
                 break
         components += 1
-    print(components)
+    return components
 
 
-def count_single_vertexes(edges_list: List[Optional[List]], vertex_count: int) -> int:
+def count_single_vertexes(edges_list, vertex_count):
     count = 0
     for i in range(1, vertex_count + 1):
         v = str(i)
@@ -58,11 +55,11 @@ def find_connected_vertex(edges_list, current_vertex):
     return None
 
 
-def del_edge_with_vertex(edges_list, current_vertex):
+def del_edge_with_vertex(edges_list, current_vertex, connected_vertex):
     for e in edges_list:
-        if current_vertex in e:
+        if current_vertex in e and connected_vertex in e:
             edges_list.remove(e)
 
 
 if __name__ == '__main__':
-    count_connected_component()
+    print(count_connected_component(*get_input_graph_in_list()))
