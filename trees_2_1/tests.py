@@ -1,5 +1,6 @@
-from trees_2_1.connected_component_count import count_connected_component
 from unittest import TestCase
+
+from trees_2_1.connected_component_count import count_connected_component
 
 
 class Tests(TestCase):
@@ -34,7 +35,7 @@ class Tests(TestCase):
         assert count_connected_component(edges_list, vertex_count) == 0
 
     def test_multi_edges(self):
-        edges_list = [['1', '2'], ['2', '1']]
+        edges_list = [['1', '2'], ['2', '1'], ['1', '2']]
         vertex_count = 3
 
         assert count_connected_component(edges_list, vertex_count) == 2
