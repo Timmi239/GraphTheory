@@ -15,50 +15,32 @@ from common.helpers import get_input_graph_in_list
 
 
 def count_connected_component(edges_list, vertex_count):
-    single_vertexes_count = count_single_vertexes(edges_list, vertex_count)
-    components = single_vertexes_count
-    while edges_list:
-        current_vertex = edges_list[0][0]
-        current_component = [current_vertex, ]
-        index = 0
-        while True:
-            while find_connected_vertex(edges_list, current_component[index]):
-                connected_vertex = find_connected_vertex(edges_list, current_component[index])
-                del_edge_with_vertex(edges_list, current_component[index], connected_vertex)
-                if connected_vertex not in current_component:
-                    current_component.append(connected_vertex)
-            if len(current_component) > index + 1:
-                index += 1
-            else:
-                break
-        components += 1
-    return components
-
-
-def count_single_vertexes(edges_list, vertex_count):
-    count = 0
+    components = 0
+    verteces_with_status = dict()
     for i in range(1, vertex_count + 1):
-        v = str(i)
-        exists = False
-        for e in edges_list:
-            if v in e:
-                exists = True
-        if not exists:
-            count += 1
-    return count
+        verteces_with_status[str(i)] = False
+    while True:
+        start_vertex = _search_not_visited_vertex(verteces_with_status)
+        if not start_vertex:
+            return components
+        components += 1
+        dfs(start_vertex, edges_list, verteces_with_status)
 
 
-def find_connected_vertex(edges_list, current_vertex):
-    for e in edges_list:
-        if current_vertex in e:
-            return e[1] if current_vertex == e[0] else e[0]
+def _search_not_visited_vertex(verteces_with_status):
+    for vertex_with_status in verteces_with_status.items():
+        if not vertex_with_status[1]:
+            return vertex_with_status[0]
     return None
 
 
-def del_edge_with_vertex(edges_list, current_vertex, connected_vertex):
-    for e in edges_list:
-        if current_vertex in e and connected_vertex in e:
-            edges_list.remove(e)
+def dfs(current_vertex, edges_list, verteces_with_status):
+    verteces_with_status[current_vertex] = True
+    for edge in edges_list:
+        if current_vertex in edge:
+            connected_vertex = edge[1] if current_vertex == edge[0] else edge[0]
+            if not verteces_with_status[connected_vertex]:
+                dfs(connected_vertex, edges_list, verteces_with_status)
 
 
 if __name__ == '__main__':
