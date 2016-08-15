@@ -3,7 +3,7 @@ from unittest import TestCase
 from trees_2_1.connected_component_count import count_connected_component
 
 
-class Tests(TestCase):
+class ConnectedComponentCountTests(TestCase):
     def test_example_1(self):
         edges_list = [['1', '2'], ['3', '2']]
         vertex_count = 4
