@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from trees_2_1.path_length_to_vertices_count import count_path_lengths
+from trees_2_1.path_length_to_vertices import count_path_lengths
 
 
 class PathLengthsTests(TestCase):
