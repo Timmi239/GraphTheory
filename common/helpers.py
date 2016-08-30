@@ -28,3 +28,10 @@ def _get_vertex_and_edges_counts():
     inp = input().split()
     vertex_count, edges_count = int(inp[0]), int(inp[1])
     return vertex_count, edges_count
+
+
+def fill_vertices_dict_with_default_value(vertex_count, default, start_index=0):
+    vertices_with_status = dict()
+    for i in range(1, vertex_count + 1):
+        vertices_with_status[str(i)] = default
+    return vertices_with_status

@@ -11,14 +11,12 @@
 # Формат выходных данных:
 # Количество компонент связности графа.
 
-from common.helpers import get_input_graph_in_list
+from common.helpers import get_input_graph_in_list, fill_vertices_dict_with_default_value
 
 
 def count_connected_component(edges_list, vertex_count):
     components = 0
-    vertices_with_status = dict()
-    for i in range(1, vertex_count + 1):
-        vertices_with_status[str(i)] = False
+    vertices_with_status = fill_vertices_dict_with_default_value(vertex_count, default=False, start_index=1)
     while True:
         start_vertex = _search_not_visited_vertex(vertices_with_status)
         if not start_vertex:

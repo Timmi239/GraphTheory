@@ -4,14 +4,12 @@
 # Вершины имеют номера от 0 до V-1.
 # Выведите список из V чисел — расстояний от вершины 0 до соответствующих вершин графа.
 
-from common.helpers import get_input_graph_in_list
+from common.helpers import get_input_graph_in_list, fill_vertices_dict_with_default_value
 
 
 def count_path_lengths(edges_list, vertex_count):
     start_vertex = '0'
-    vertices_with_path_len = dict()
-    for i in range(vertex_count):
-        vertices_with_path_len[str(i)] = -1
+    vertices_with_path_len = fill_vertices_dict_with_default_value(vertex_count, default=-1)
     dfs(start_vertex, edges_list, vertices_with_path_len)
     return [vertices_with_path_len[str(i)] for i in range(vertex_count)]
 
